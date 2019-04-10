@@ -1,0 +1,45 @@
+target
+target/
+/target/
+.classpath
+target-test
+target-test/
+/target-test/
+
+/bin/
+/deploy/
+*.class
+######################
+# Eclipse
+######################
+*.pydevproject
+.project
+.metadata
+tmp/
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.factorypath
+/src/main/resources/rebel.xml
+
+######################
+# Mac OSX
+######################
+.DS_Store
+.svn
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+

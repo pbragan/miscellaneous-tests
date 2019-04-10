@@ -15,8 +15,20 @@ public class ShiftOperatorTest extends TestCase{
 		return new TestSuite(ShiftOperatorTest.class);
 	}
 
+	/**
+	 * Uno de los operadores poco conocidos en Java el shift. Parece un operador de bajo nivel
+	 * pero es totalmente utilizable. <br>
+	 * El shiftright lo que hace es mover cada bit para la derecha dejando en cero el bit primero que se mueve.
+	 * En el caso de >> es un signed shift right ya que no mueve el primer bit que identifica el signo.
+	 * <br>
+	 * Es interesante ver que en el shift right 1 se obtiene siempre la mitad de un entero como entero truncado sin decimales.
+	 * En este caso la mitad de 60 = 30, de 30 es 15, de 15 es 7, de 7 es 3, de 3 es 1 y luego de 1 ya es cero.
+	 * <br>
+	 * El signed shift right se utiliza en la implementacion de ArrayList para hacer crecer el array primitivo que se utiliza como estructura de datos interna. 
+	 */
 	public void sigendShiftRightOperatorTest() {
 		int i = 60;
+		//60 = 0000 0000 0000 0000 0000 0000 0011 1100 >> 1 => 0000 0000 0000 0000 0000 0001 1110 = 2pow(4)+2pow(3)+2pow(2)+2pow(1)=30
 		assertEquals(30, i >> 1);
 		assertEquals(15, i >> 2);
 		assertEquals(7, i >> 3);
@@ -33,7 +45,9 @@ public class ShiftOperatorTest extends TestCase{
 		//que es igual a 
 		assertEquals(NumberUtil.fromStringBinary("11111111111111111111111111100010").intValue(), i >> 1);
 	}
-	
+	/**
+	 * En este caso se puede ver como el unsigned shift altera el signo del elemento
+	 */
 	public void unsigendShiftRightOperatorTest() {
 		int i = 60;
 		assertEquals(30, i >>> 1);

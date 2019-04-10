@@ -24,7 +24,13 @@ public class StreamVariousTest extends TestCase {
 	}
 	private static final String MENSAJE_DE_ITERACION = "indice %d de iteracion...";
 	private static final int ITERACION_FILTER = Integer.MAX_VALUE/4;
-	
+	/**
+	 * Este test nos muestra que el Stream tiene un gran overhead y que es mejor utilizar la iteracion primitiva.
+	 * <br>
+	 * Tambien nos muestra que el Stream nos da la posibilidad de aplicar paralelismo y que en esos casos es mas optimo
+	 * utilizar el forEach del Stream. Lo que hay que tener en cuenta es que un forEach en paralelo puede llevarnos a 
+	 * resultados no deseados si queremos manejar un valor de indice o trabajar con alguna estructura no thread safe.
+	 */
 	public void testIteracionesPrimitivasVsStreamRange() {
 		long start = System.currentTimeMillis();
 		for(int i = Integer.MIN_VALUE+1;i<Integer.MAX_VALUE;i++) {

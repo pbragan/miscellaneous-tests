@@ -38,7 +38,15 @@ public class CollectionTest extends TestCase {
 		list.get(maxElements/4);
 		list.get(0);
 	}
-	
+	/**
+	 * Este test realiza una comparación entre LinkedList y ArrayList.<br>
+	 * Da dos resultados importantes y representativos de la diferencia entre ambas implementaciones de List.<br>
+	 * Es importante dos caracteristicas:
+	 * 1- El rendimiento de LinkedList y ArrayList ante el agregado de elementos y su acceso.
+	 * 2- El uso de recursos, en este caso memoria utilizada. (por ejemplo el caso del ArrayList con una capacidad inicial grande)
+	 * <br>
+	 * A su vez este tema invita al interesado a ver la implementaci&oacute;n real de cada caso y entender los resultados obtenidos.
+	 */
 	public void testAccessingElementsLinkedListVsArrayList() {
 		List<Integer> linkedList = new LinkedList<>();
 		List<Integer> arrayList = new ArrayList<>();

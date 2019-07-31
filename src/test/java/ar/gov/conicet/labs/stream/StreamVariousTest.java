@@ -32,24 +32,36 @@ public class StreamVariousTest extends TestCase {
 	 * resultados no deseados si queremos manejar un valor de indice o trabajar con alguna estructura no thread safe.
 	 */
 	public void testIteracionesPrimitivasVsStreamRange() {
+		doPrimitiveIteration();
+		streamForEach();
+		testStreamParallelForEach();
+	}
+
+	public void testStreamParallelForEach() {
+		long start2 =  System.currentTimeMillis();
+		IntStream.range(Integer.MIN_VALUE+1, Integer.MAX_VALUE-1).parallel().forEach(
+				j -> { if(j % ITERACION_FILTER == 0) System.out.println(String.format(MENSAJE_DE_ITERACION, j));}
+		);
+		long end2 = System.currentTimeMillis();
+		System.out.println("For IntStream.range.parallel (ms): "+(end2-start2));
+	}
+
+	public void streamForEach() {
+		long start = System.currentTimeMillis();
+		IntStream.range(Integer.MIN_VALUE+1, Integer.MAX_VALUE-1).forEach(
+				j -> { if(j % ITERACION_FILTER == 0) System.out.println(String.format(MENSAJE_DE_ITERACION, j));}
+		);
+		long end = System.currentTimeMillis();
+		System.out.println("For IntStream.range (ms): "+(end-start));
+	}
+
+	public void doPrimitiveIteration() {
 		long start = System.currentTimeMillis();
 		for(int i = Integer.MIN_VALUE+1;i<Integer.MAX_VALUE;i++) {
 			if(i % ITERACION_FILTER == 0) System.out.println(String.format(MENSAJE_DE_ITERACION, i));
 		}
 		long end = System.currentTimeMillis();
 		System.out.println("For primitivo (ms): "+(end-start));
-		start = System.currentTimeMillis();
-		IntStream.range(Integer.MIN_VALUE+1, Integer.MAX_VALUE-1).forEach(
-				j -> { if(j % ITERACION_FILTER == 0) System.out.println(String.format(MENSAJE_DE_ITERACION, j));}
-		);
-		end = System.currentTimeMillis();
-		System.out.println("For IntStream.range (ms): "+(end-start));
-		start = System.currentTimeMillis();
-		IntStream.range(Integer.MIN_VALUE+1, Integer.MAX_VALUE-1).parallel().forEach(
-				j -> { if(j % ITERACION_FILTER == 0) System.out.println(String.format(MENSAJE_DE_ITERACION, j));}
-		);
-		end = System.currentTimeMillis();
-		System.out.println("For IntStream.range.parallel (ms): "+(end-start));
 	}
 	
 }

@@ -5,6 +5,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+/**
+ * Es importante saber que todas las operaciones de shift son transformadas a 32 bits.
+ * @author pbragan@conicet.gov.ar
+ *
+ */
 public class ShiftOperatorTest extends TestCase{
 
 	public ShiftOperatorTest(String name) {

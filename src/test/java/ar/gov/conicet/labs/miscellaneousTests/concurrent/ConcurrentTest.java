@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -77,9 +78,15 @@ public class ConcurrentTest extends TestCase {
 			e.printStackTrace();
 		}
 		executorService.shutdown();
-		int i = 0;
+		long i = 0;
+		int filtroMensaje = 50000;
 		while(!executorService.isTerminated()) {
 			i++;
+			if(i%filtroMensaje == 0) {
+				System.out.println("Pool Size: "+((ForkJoinPool)executorService).getPoolSize());
+				System.out.println("Paralelismo: "+((ForkJoinPool)executorService).getPoolSize());
+				System.out.println("Active ThreadCount: "+((ForkJoinPool)executorService).getActiveThreadCount());
+			}
 		}
 		System.out.println(i+" iteraciones hasta que ExecutorService terminates");
 		long end = System.currentTimeMillis();
@@ -95,6 +102,11 @@ public class ConcurrentTest extends TestCase {
 		i = 0;
 		while(!executorService.isTerminated()) {
 			i++;
+			if(i%filtroMensaje == 0) {
+				System.out.println("Pool Size: "+((ForkJoinPool)executorService).getPoolSize());
+				System.out.println("Paralelismo: "+((ForkJoinPool)executorService).getPoolSize());
+				System.out.println("Active ThreadCount: "+((ForkJoinPool)executorService).getActiveThreadCount());
+			}
 		}
 		System.out.println(i+" iteraciones hasta que ExecutorService terminates");
 		end = System.currentTimeMillis();
@@ -109,6 +121,11 @@ public class ConcurrentTest extends TestCase {
 		i = 0;
 		while(!executorService.isTerminated()) {
 			i++;
+			if(i%filtroMensaje == 0) {
+				System.out.println("Pool Size: "+((ThreadPoolExecutor)executorService).getPoolSize());
+				System.out.println("Paralelismo: "+((ThreadPoolExecutor)executorService).getPoolSize());
+				System.out.println("Active Count: "+((ThreadPoolExecutor)executorService).getActiveCount());
+			}
 		}
 		System.out.println(i+" iteraciones hasta que ExecutorService terminates");
 		end = System.currentTimeMillis();
@@ -140,7 +157,7 @@ public class ConcurrentTest extends TestCase {
 		}
 		System.out.println(i+" iteraciones hasta que ExecutorService terminates");
 		end = System.currentTimeMillis();
-		System.out.println("Termina ExecutorService.newSingleThreadExecutor(availableProcessors).execute (una por una) en (ms): "+(end-start));
+		System.out.println("Termina ExecutorService.newSingleThreadExecutor().execute (una por una) en (ms): "+(end-start));
 		
 		// FORKJOIN!!!
 		start = System.currentTimeMillis();
@@ -153,6 +170,11 @@ public class ConcurrentTest extends TestCase {
 		i = 0;
 		while(!forkJoinPool.isTerminated()) {
 			i++;
+			if(i%filtroMensaje == 0) {
+				System.out.println("Pool Size: "+forkJoinPool.getPoolSize());
+				System.out.println("Paralelismo: "+forkJoinPool.getPoolSize());
+				System.out.println("Active ThreadCount: "+forkJoinPool.getActiveThreadCount());
+			}
 		}
 		System.out.println(i+" iteraciones hasta que ForkJoinPool terminates");
 		end = System.currentTimeMillis();
